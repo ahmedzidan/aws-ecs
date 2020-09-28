@@ -1,0 +1,7 @@
+version: "2.4"
+
+services:
+  nginx:
+    image: "${REG_URL}/${SERVICE_NAME}:${APP_VERSION}"
+    build:
+      context: ../

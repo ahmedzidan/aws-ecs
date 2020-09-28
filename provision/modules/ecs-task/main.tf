@@ -1,13 +1,13 @@
 resource "aws_iam_role" "ecs_host_role" {
   name = "ecs_host_role_ip-test"
-  assume_role_policy = file("policies/ecs-role.json")
+  assume_role_policy = var.ecs_host_policy
 }
 
 data "aws_iam_role" "ecs_task_execution_role" {
   name = "ecsTaskExecutionRole"
 }
 data "template_file" "containers" {
-  template = file("task-definitions/app.json")
+  template = var.container_definitions
 
   vars = {
     image_tag        = var.image_tag
@@ -23,9 +23,6 @@ resource "aws_ecs_task_definition" "main" {
   requires_compatibilities = ["FARGATE"]
   cpu                      = var.cpu
   memory                   = var.memory
-  task_role_arn = aws_iam_role.ecs_host_role.arn
+  task_role_arn            = aws_iam_role.ecs_host_role.arn
   execution_role_arn       = data.aws_iam_role.ecs_task_execution_role.arn
-  volume  {
-    name = "iprice"
-  }
 }

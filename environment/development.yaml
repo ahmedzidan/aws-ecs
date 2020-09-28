@@ -1,0 +1,13 @@
+version: "2.4"
+
+services:
+  nginx:
+    build:
+      context: ../app
+    container_name: static-pages
+    working_dir: /var/www/html
+    volumes:
+      - ../app:/var/www/html
+    ports:
+      - 80:80
+    restart: always

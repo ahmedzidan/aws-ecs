@@ -1,0 +1,16 @@
+[
+  {
+    "name": "nginx",
+    "image": "${image_url}:${image_tag}",
+    "essential": true,
+    "workingDirectory": "/var/www/html",
+    "portMappings": [
+      {
+        "containerPort": 80,
+        "hostPort": 80,
+        "protocol": "tcp"
+      }
+    ],
+    "memory": 256
+  }
+]

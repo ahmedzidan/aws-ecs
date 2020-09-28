@@ -1,3 +1,3 @@
-//output "omsys_domain" {
-//  value = aws_route53_record.omsys.name
-//}
+output "domain_name" {
+  value = module.my_domain.name
+}

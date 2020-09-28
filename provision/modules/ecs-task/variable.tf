@@ -20,3 +20,18 @@ variable "app_name" {
   description = "app name"
   type = string
 }
+
+variable "image_url" {
+  description = "docker image url"
+  type = string
+}
+
+variable "ecs_host_policy" {
+  description = "policy for ecs host"
+  type = string
+}
+
+variable "container_definitions" {
+  description = "ecs continer definition"
+  type = string
+}

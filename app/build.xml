@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<project name="app" default="build">
+    <property name="env" value="development"/>
+
+    <!-- ============================================ -->
+    <!-- Target: build                                -->
+    <!-- ============================================ -->
+    <target name="build_containers"
+            description="Build containers">
+        <exec executable="/bin/bash" failonerror="true">
+            <arg value="-c"/>
+            <arg value="APP_VERSION=${app_version} docker-compose -f ../environment/build.yaml build --no-cache"/>
+        </exec>
+    </target>
+
+    <!-- ============================================ -->
+    <!-- Target: push images                          -->
+    <!-- ============================================ -->
+    <target name="push_docker_images"
+            description="Push Docker images">
+        <exec executable="/bin/bash" failonerror="true">
+            <arg value="-c" />
+            <arg value="APP_VERSION=${app_version} docker-compose -f ../environment/build.yaml push" />
+        </exec>
+    </target>
+
+    <target name="build"
+            description="Run all tasks"
+            depends="
+            build_containers,
+            push_docker_images"/>
+</project>
